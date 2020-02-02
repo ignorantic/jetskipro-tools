@@ -4,8 +4,8 @@ import fetchify from '../fetchify';
 /**
  * Function used to transform a fetched collection
  *
- * @return [Array]
- * @param data
+ * @param {Array} data
+ * @return {Array}
  */
 const fetchifyCollection = (data) => map(fetchify, data);
 
