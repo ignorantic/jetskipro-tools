@@ -1,26 +1,7 @@
 import { prop } from 'ramda';
-import moment from 'moment';
 import isSameDay from './isSameDay';
 import extractPromotionDiscount from './extractPromotionDiscount';
-
-/**
- * Login if promotion is active
- *
- * @param {Object} discount
- * @param {Object} discount.orderStartAt
- * @param {Object} discount.orderExpiresAt
- * @param {Object} discount.value
- * @param {string} date
- * @return {boolean}
- */
-const isPromotionActive = (discount, date) => Boolean(
-  moment(date).isBetween(
-    prop('orderStartsAt', discount),
-    prop('orderExpiresAt', discount),
-    'day',
-    '[]',
-  ),
-);
+import isPromotionActive from './isPromotionActive';
 
 /**
  * Get initial cost, before applying discounts

@@ -7,6 +7,8 @@ import { propOr } from 'ramda';
  * @param {number} count
  * @return {number}
  */
-const getActualScooterCount = (order, count) => count || propOr(0, 'scootersCount', order);
+const getActualScooterCount = (order, count) => (
+  count || propOr(0, 'scootersCount', order)
+);
 
 export default getActualScooterCount;

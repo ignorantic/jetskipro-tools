@@ -4,6 +4,7 @@ import { add, propOr, reduce } from 'ramda';
  * Get cost of additional services
  *
  * @param {Array} services
+ * @return {number}
  */
 const calcAdditionalServicesCost = services => reduce(
   (accumulator, service) => add(accumulator, propOr(0, 'price', service)),

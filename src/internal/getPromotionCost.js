@@ -13,10 +13,10 @@ import extractPromoCodeDiscount from './etractPromoCodeDiscount';
  */
 const getPromotionCost = params => {
   const {
+    order,
     initialCost,
     initialPromotionDiscount,
     promoCodeDiscount,
-    order,
   } = params;
 
   const appliedPromoCodeDiscount = order

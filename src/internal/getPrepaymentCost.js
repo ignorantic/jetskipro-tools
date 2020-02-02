@@ -1,20 +1,8 @@
 import isSameDay from './isSameDay';
 import applyDiscount from './applyDiscount';
 import { isDateEarlyEnough } from './isDateEarlyEnough';
-import { compose, find, propEq, propOr } from 'ramda';
+import extractPrepaymentDiscount from './extractPrepaymentDiscount';
 
-/**
- * Extract prepayment discount from order
- *
- * @param {Object} order
- * @param {Object} params.discounts
- * @return {number}
- */
-const extractPrepaymentDiscount = compose(
-  propOr(0, 'value'),
-  find(propEq('type', 'prepayment')),
-  propOr([], 'discounts'),
-);
 /**
  * Get value of prepayment discount and discount cost
  *
