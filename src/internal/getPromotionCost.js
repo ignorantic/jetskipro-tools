@@ -6,10 +6,10 @@ import extractPromoCodeDiscount from './etractPromoCodeDiscount';
  *
  * @param {Object} params
  * @param {Object} params.order
- * @param {number} params.scootersCount
- * @param {Object} params.calculations
- * @param {string} params.dateTour
- * @return {Object}
+ * @param {number} params.initialCost
+ * @param {number} params.initialPromotionDiscount
+ * @param {number} params.promoCodeDiscount
+ * @return {Array}
  */
 const getPromotionCost = params => {
   const {

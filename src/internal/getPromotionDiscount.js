@@ -29,7 +29,7 @@ const isPromotionActive = (discount, date) => Boolean(
  * @param {Object} params.order
  * @param {Object} params.calculations
  * @param {string} params.dateTour
- * @return {Object}
+ * @return {number}
  */
 const getPromotionDiscount = params => {
   const {

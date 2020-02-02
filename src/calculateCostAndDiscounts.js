@@ -21,6 +21,7 @@ import isSameDay from './internal/isSameDay';
 import getPromotionDiscount from './internal/getPromotionDiscount';
 import getPromotionCost from './internal/getPromotionCost';
 import applyDiscount from './internal/applyDiscount';
+import getPromoCodeCost from './internal/getPromoCodeCost';
 
 /** Make function that pluck prop `id` form array items and filter undefined and null */
 const pluckIdsAndFilterVoid = compose(
@@ -134,10 +135,6 @@ const getActualScooterPrice = (order, calculations, count) => (
  * @param {Object} params.order
  * @param {number} params.scootersCount
  * @param {Object} params.calculations
- * @param {number} params.calculations.scooterPrice
- * @param {number} params.calculations.discountPrepayment
- * @param {number} params.calculations.discountPromotion
- * @param {string} params.dateTour
  * @return {number}
  */
 const getInitialCost = params => {
@@ -151,40 +148,6 @@ const getInitialCost = params => {
   const actualScootersCount = getActualScooterCount(order, scootersCount);
 
   return multiply(actualScooterPrice, actualScootersCount);
-};
-
-/**
- * Get value of applied promotional code discount and discount cost
- *
- * @param {Object} params
- * @param {number} params.promotionCost
- * @param {number} params.promoCodeDiscount
- * @return {Object}
- */
-const getPromoCodeCost = params => {
-  const {
-    promotionCost,
-    promoCodeDiscount,
-    appliedPromoCodeDiscount,
-    ...rest
-  } = params;
-
-  if (appliedPromoCodeDiscount === 0) {
-    return {
-      ...rest,
-      promotionCost,
-      appliedPromoCodeDiscount,
-      promoCodeCost: promotionCost,
-    };
-  }
-
-  const promoCodeCost = applyDiscount(promotionCost, appliedPromoCodeDiscount);
-  return {
-    ...rest,
-    promotionCost,
-    appliedPromoCodeDiscount,
-    promoCodeCost,
-  };
 };
 
 /**
@@ -274,6 +237,10 @@ const getTotalCost = params => {
  * Get values of all discounts and discount costs with each of them
  *
  * @param {Object} params
+ * @param {Object} params.order
+ * @param {Object} params.calculations
+ * @param {string} params.dateTour
+ * @param {number} params.scootersCount
  * @return {Array}
  */
 const calculateCostAndDiscounts = params => {
@@ -288,7 +255,6 @@ const calculateCostAndDiscounts = params => {
   const calculate = compose(
     getTotalCost,
     getPrepaymentCost,
-    getPromoCodeCost,
   );
 
   const initialCost = getInitialCost({
@@ -315,9 +281,14 @@ const calculateCostAndDiscounts = params => {
     order,
   });
 
+  const promoCodeCost = getPromoCodeCost({
+    promotionCost,
+    appliedPromoCodeDiscount,
+  });
+
   const {
-    promoCodeCost,
-    appliedPrepaymentDiscount, prepaymentCost,
+    appliedPrepaymentDiscount,
+    prepaymentCost,
     additionalServicesCost,
     totalCost,
   } = calculate({
@@ -326,6 +297,7 @@ const calculateCostAndDiscounts = params => {
     appliedPromotionDiscount,
     promotionCost,
     appliedPromoCodeDiscount,
+    promoCodeCost,
   });
 
   return [
