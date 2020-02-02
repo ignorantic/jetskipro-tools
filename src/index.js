@@ -4,3 +4,4 @@ export { default as sendify } from './sendify';
 export { default as resetValidationFields } from './resetValidationFields';
 export { default as toCamel } from './toCamel';
 export { default as toSnake } from './toSnake';
+export { default as isDateEarlyEnough } from './isDateEarlyEnough';

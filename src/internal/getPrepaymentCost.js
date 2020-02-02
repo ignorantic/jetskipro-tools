@@ -1,6 +1,6 @@
 import isSameDay from './isSameDay';
 import applyDiscount from './applyDiscount';
-import { isDateEarlyEnough } from './isDateEarlyEnough';
+import { isDateEarlyEnough } from '../isDateEarlyEnough';
 import extractPrepaymentDiscount from './extractPrepaymentDiscount';
 
 /**
