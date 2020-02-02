@@ -9,7 +9,7 @@ import extractPromoCodeDiscount from './etractPromoCodeDiscount';
  * @param {number} params.initialCost
  * @param {number} params.initialPromotionDiscount
  * @param {number} params.promoCodeDiscount
- * @return {Array}
+ * @return {[number, number, number]}
  */
 const getPromotionCost = params => {
   const {

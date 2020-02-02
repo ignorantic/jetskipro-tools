@@ -3,8 +3,10 @@
  *
  * @param {number} cost
  * @param {number} discount
- * @returns {number|undefined}
+ * @returns {number}
  */
-const applyDiscount = (cost, discount) => Math.round(cost * (1 - (discount / 100)));
+const applyDiscount = (cost, discount) => (
+  Math.round(cost * (1 - (discount / 100)))
+);
 
 export default applyDiscount;
