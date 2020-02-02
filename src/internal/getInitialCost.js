@@ -11,7 +11,7 @@ import getActualScooterCount from './getActualScooterCount';
  * @param {Object} params.calculations
  * @return {number}
  */
-const getInitialCost = params => {
+const getInitialCost = (params) => {
   const {
     order,
     scootersCount,

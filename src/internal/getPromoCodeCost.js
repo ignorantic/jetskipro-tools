@@ -8,7 +8,7 @@ import applyDiscount from './applyDiscount';
  * @param {number} params.appliedPromoCodeDiscount
  * @return {number}
  */
-const getPromoCodeCost = params => {
+const getPromoCodeCost = (params) => {
   const {
     promotionCost,
     appliedPromoCodeDiscount,

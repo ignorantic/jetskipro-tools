@@ -8,11 +8,11 @@ import containsIds from './containsIds';
  *
  * @param {Object} params
  * @param {Object} params.order
- * @param {Array}  params.services
- * @param {Array}  params.selected
+ * @param {Array}  params.additionalServices
+ * @param {Array}  params.selectedAdditionalServices
  * @returns {Array}
  */
-const getAppliedAdditionalServices = params => {
+const getAppliedAdditionalServices = (params) => {
   const {
     order,
     additionalServices,

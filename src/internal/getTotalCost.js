@@ -12,7 +12,7 @@ import calcAdditionalServicesCost from './calcAdditionalServicesCost';
  * @param {string} params.selectedAdditionalServices
  * @return {[number, number]}
  */
-const getTotalCost = params => {
+const getTotalCost = (params) => {
   const {
     prepaymentCost,
   } = params;

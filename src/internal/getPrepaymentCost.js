@@ -14,7 +14,7 @@ import extractPrepaymentDiscount from './extractPrepaymentDiscount';
  * @param {Object} params.order
  * @return {[number, number]}
  */
-const getPrepaymentCost = params => {
+const getPrepaymentCost = (params) => {
   const {
     promoCodeCost,
     bookingType,

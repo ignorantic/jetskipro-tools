@@ -11,7 +11,7 @@ import extractPromoCodeDiscount from './etractPromoCodeDiscount';
  * @param {number} params.promoCodeDiscount
  * @return {[number, number, number]}
  */
-const getPromotionCost = params => {
+const getPromotionCost = (params) => {
   const {
     order,
     initialCost,

@@ -117,7 +117,7 @@ describe('calculateCostAndDiscounts', () => {
       });
     });
 
-    describe('return cost with promotion discount', () => {
+    describe('return cost with promotion discount if promotion is active', () => {
       const bookingType = 'partial';
       const scootersCount = 1;
       const dateTour = '2019-07-14T12:00:00+03:00';
@@ -146,7 +146,7 @@ describe('calculateCostAndDiscounts', () => {
       });
     });
 
-    describe('return cost with promo-code discount', () => {
+    describe('return cost with promo-code discount if promotion is inactive', () => {
       const bookingType = 'partial';
       const scootersCount = 1;
       const dateTour = '2019-07-13T12:00:00+03:00';
@@ -418,7 +418,7 @@ describe('calculateCostAndDiscounts', () => {
         discounts: [],
       };
 
-      const additionalServices = [
+      const anotherAdditionalServices = [
         {
           id: 1,
           price: 1500,
@@ -474,7 +474,7 @@ describe('calculateCostAndDiscounts', () => {
           scootersCount: 2,
           bookingType,
           dateTour,
-          additionalServices,
+          additionalServices: anotherAdditionalServices,
           selectedAdditionalServices: selectedAdditionalServicesIncludingAdded,
         })).toEqual(resultForAdd);
       });

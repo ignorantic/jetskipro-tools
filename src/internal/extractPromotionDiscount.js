@@ -1,4 +1,6 @@
-import { compose, find, propEq, propOr } from 'ramda';
+import {
+  compose, find, propEq, propOr,
+} from 'ramda';
 
 /**
  * Extract promotion discount from order

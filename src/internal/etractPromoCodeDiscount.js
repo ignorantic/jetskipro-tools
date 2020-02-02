@@ -1,4 +1,6 @@
-import { anyPass, compose, find, propEq, propOr } from 'ramda';
+import {
+  anyPass, compose, find, propEq, propOr,
+} from 'ramda';
 
 /**
  * Extract promo code discount from order

@@ -12,7 +12,7 @@ import isPromotionActive from './isPromotionActive';
  * @param {string} params.dateTour
  * @return {number}
  */
-const getPromotionDiscount = params => {
+const getPromotionDiscount = (params) => {
   const {
     order,
     calculations,
@@ -24,10 +24,6 @@ const getPromotionDiscount = params => {
 
   if (isSameDay(dateTour, order)) {
     return extractPromotionDiscount(order);
-  }
-
-  if (prop('value', discountPromotion) < promoCodeDiscount) {
-    return 0;
   }
 
   const isPromotion = isPromotionActive(discountPromotion, dateTour);

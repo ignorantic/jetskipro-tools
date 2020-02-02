@@ -16,7 +16,7 @@ import getInitialCost from './internal/getInitialCost';
  * @param {string} params.bookingType
  * @return {Array}
  */
-const calculateCostAndDiscounts = params => {
+const calculateCostAndDiscounts = (params) => {
   const {
     order,
     scootersCount,

@@ -8,7 +8,7 @@ import {
  * @param {Array} ids
  * @return {function}
  */
-const containsIds = ids => compose(
+const containsIds = (ids) => compose(
   includes(__, ids),
   prop('id'),
 );
