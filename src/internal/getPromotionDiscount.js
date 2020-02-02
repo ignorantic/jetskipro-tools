@@ -16,7 +16,6 @@ const getPromotionDiscount = (params) => {
   const {
     order,
     calculations,
-    promoCodeDiscount,
     dateTour,
   } = params;
 

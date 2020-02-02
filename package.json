@@ -2,10 +2,11 @@
   "name": "jetskipro-tools",
   "version": "1.0.0",
   "description": "Common tools for Jetskipro project",
-  "main": "src/index.js",
-  "author": "Andrii Sorokin",
+  "main": "dist/index.js",
   "private": true,
   "scripts": {
+    "build": "cross-env BABEL_ENV=es babel src --out-dir dist",
+    "lint": "eslint src/*.js src/internal/*.js",
     "test": "jest"
   },
   "dependencies": {
@@ -16,6 +17,7 @@
     "@babel/cli": "^7.8.4",
     "@babel/preset-env": "^7.8.4",
     "babel-eslint": "^10.0.3",
+    "cross-env": "^7.0.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-loader": "^3.0.3",
