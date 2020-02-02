@@ -1,19 +1,7 @@
-import { compose, find, prop, propEq, propOr } from 'ramda';
+import { prop } from 'ramda';
 import moment from 'moment';
 import isSameDay from './isSameDay';
-
-/**
- * Extract promotion discount from order
- *
- * @param {Object} order
- * @param {Object} params.discounts
- * @return {number}
- */
-const extractPromotionDiscount = compose(
-  propOr(0, 'value'),
-  find(propEq('type', 'promotion')),
-  propOr([], 'discounts'),
-);
+import extractPromotionDiscount from './extractPromotionDiscount';
 
 /**
  * Login if promotion is active
@@ -49,44 +37,20 @@ const getPromotionDiscount = params => {
     calculations,
     promoCodeDiscount,
     dateTour,
-    ...rest
   } = params;
 
   const { discountPromotion } = calculations;
 
   if (isSameDay(dateTour, order)) {
-    const appliedPromotionDiscount = extractPromotionDiscount(order);
-    return {
-      ...rest,
-      order,
-      calculations,
-      dateTour,
-      appliedPromotionDiscount,
-    };
+    return extractPromotionDiscount(order);
   }
 
   if (prop('value', discountPromotion) < promoCodeDiscount) {
-    return {
-      ...rest,
-      order,
-      calculations,
-      promoCodeDiscount,
-      dateTour,
-      appliedPromotionDiscount: 0,
-    };
+    return 0;
   }
 
   const isPromotion = isPromotionActive(discountPromotion, dateTour);
-  const appliedPromotionDiscount = isPromotion ? prop('value', discountPromotion) : 0;
-
-  return {
-    ...rest,
-    order,
-    calculations,
-    promoCodeDiscount,
-    dateTour,
-    appliedPromotionDiscount,
-  };
+  return isPromotion ? prop('value', discountPromotion) : 0;
 };
 
 export default getPromotionDiscount;

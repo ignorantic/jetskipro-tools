@@ -3,7 +3,6 @@ import {
   __,
   add,
   and,
-  anyPass,
   compose,
   eqBy,
   filter,
@@ -20,16 +19,8 @@ import {
 } from 'ramda';
 import isSameDay from './internal/isSameDay';
 import getPromotionDiscount from './internal/getPromotionDiscount';
-
-/**
- * Apply discount to got cost
- *
- * @param {number} cost
- * @param {number} discount
- * @returns {number|undefined}
- */
-const applyDiscount = (cost, discount) => Math.round(cost * (1 - (discount / 100)));
-
+import getPromotionCost from './internal/getPromotionCost';
+import applyDiscount from './internal/applyDiscount';
 
 /** Make function that pluck prop `id` form array items and filter undefined and null */
 const pluckIdsAndFilterVoid = compose(
@@ -85,20 +76,6 @@ const getAppliedAdditionalServices = params => {
 const extractPrepaymentDiscount = compose(
   propOr(0, 'value'),
   find(propEq('type', 'prepayment')),
-  propOr([], 'discounts'),
-);
-
-
-/**
- * Extract promo code discount from order
- *
- * @param {Object} order
- * @param {Object} order.discounts
- * @return {number}
- */
-const extractPromoCodeDiscount = compose(
-  propOr(0, 'value'),
-  find(anyPass([propEq('type', 'promo_code_one'), propEq('type', 'promo_code_many')])),
   propOr([], 'discounts'),
 );
 
@@ -174,51 +151,6 @@ const getInitialCost = params => {
   const actualScootersCount = getActualScooterCount(order, scootersCount);
 
   return multiply(actualScooterPrice, actualScootersCount);
-};
-
-/**
- * Get value of applied promotion discount and discount cost
- *
- * @param {Object} params
- * @param {Object} params.order
- * @param {number} params.scootersCount
- * @param {Object} params.calculations
- * @param {string} params.dateTour
- * @return {Object}
- */
-const getPromotionCost = params => {
-  const {
-    initialCost,
-    appliedPromotionDiscount,
-    promoCodeDiscount,
-    order,
-    ...rest
-  } = params;
-
-  const appliedPromoCodeDiscount = order
-    ? extractPromoCodeDiscount(order)
-    : promoCodeDiscount || 0;
-
-  if (appliedPromotionDiscount >= appliedPromoCodeDiscount) {
-    const promotionCost = applyDiscount(initialCost, appliedPromotionDiscount);
-    return {
-      ...rest,
-      initialCost,
-      appliedPromotionDiscount,
-      promotionCost,
-      appliedPromoCodeDiscount: 0,
-      order,
-    };
-  }
-
-  return {
-    ...rest,
-    initialCost,
-    appliedPromotionDiscount: 0,
-    promotionCost: initialCost,
-    appliedPromoCodeDiscount,
-    order,
-  };
 };
 
 /**
@@ -349,14 +281,14 @@ const calculateCostAndDiscounts = params => {
     order,
     scootersCount,
     calculations,
+    promoCodeDiscount,
+    dateTour,
   } = params;
 
   const calculate = compose(
     getTotalCost,
     getPrepaymentCost,
     getPromoCodeCost,
-    getPromotionCost,
-    getPromotionDiscount,
   );
 
   const initialCost = getInitialCost({
@@ -365,15 +297,35 @@ const calculateCostAndDiscounts = params => {
     calculations,
   });
 
+  const initialPromotionDiscount = getPromotionDiscount({
+    order,
+    calculations,
+    promoCodeDiscount,
+    dateTour,
+  });
+
+  const [
+    appliedPromotionDiscount,
+    promotionCost,
+    appliedPromoCodeDiscount,
+  ] = getPromotionCost({
+    initialCost,
+    initialPromotionDiscount,
+    promoCodeDiscount,
+    order,
+  });
+
   const {
-    appliedPromotionDiscount, promotionCost,
-    appliedPromoCodeDiscount, promoCodeCost,
+    promoCodeCost,
     appliedPrepaymentDiscount, prepaymentCost,
     additionalServicesCost,
     totalCost,
   } = calculate({
     ...params,
     initialCost,
+    appliedPromotionDiscount,
+    promotionCost,
+    appliedPromoCodeDiscount,
   });
 
   return [
