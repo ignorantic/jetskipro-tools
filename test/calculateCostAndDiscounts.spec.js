@@ -51,7 +51,6 @@ describe('calculateCostAndDiscounts', () => {
         scooterPrice: 15800,
         earlyDiscountDayCount: 30,
       };
-      const selectedAdditionalServices = [{}, {}, {}, {}, {}];
       const result = [15800, 0, 15800, 0, 15800, 0, 15800, 0, 15800];
 
       it('should be equal [15800, 0, 15800, 0, 15800, 0, 15800, 0, 15800]', () => {
@@ -59,8 +58,6 @@ describe('calculateCostAndDiscounts', () => {
           calculations,
           scootersCount,
           bookingType,
-          additionalServices,
-          selectedAdditionalServices,
         })).toEqual(result);
       });
     });
@@ -73,7 +70,6 @@ describe('calculateCostAndDiscounts', () => {
         scooterPrice: 15800,
         earlyDiscountDayCount: 30,
       };
-      const selectedAdditionalServices = [{}, {}, {}, {}, {}];
       const result = [15800, 0, 15800, 0, 15800, 10, 14220, 0, 14220];
 
       it('should be equal [15800, 0, 15800, 0, 15800, 10, 14220, 0, 14220]', () => {
@@ -82,8 +78,6 @@ describe('calculateCostAndDiscounts', () => {
           calculations,
           scootersCount,
           bookingType,
-          additionalServices,
-          selectedAdditionalServices,
         })).toEqual(result);
       });
     });
@@ -102,7 +96,6 @@ describe('calculateCostAndDiscounts', () => {
         scooterPrice: 15800,
         earlyDiscountDayCount: 30,
       };
-      const selectedAdditionalServices = [{}, {}, {}, {}, {}];
       const result = [15800, 0, 15800, 0, 15800, 0, 15800, 0, 15800];
 
       it('should be equal [15800, 0, 15800, 0, 15800, 0, 15800]', () => {
@@ -111,8 +104,6 @@ describe('calculateCostAndDiscounts', () => {
           scootersCount,
           bookingType,
           dateTour,
-          additionalServices,
-          selectedAdditionalServices,
         })).toEqual(result);
       });
     });
@@ -131,7 +122,6 @@ describe('calculateCostAndDiscounts', () => {
         scooterPrice: 15800,
         earlyDiscountDayCount: 30,
       };
-      const selectedAdditionalServices = [{}, {}, {}, {}, {}];
       const result = [15800, 15, 13430, 0, 13430, 0, 13430, 0, 13430];
 
       it('should be equal [15800, 15, 13430, 0, 13430, 0, 13430, 0, 13430]', () => {
@@ -140,8 +130,6 @@ describe('calculateCostAndDiscounts', () => {
           scootersCount,
           bookingType,
           dateTour,
-          additionalServices,
-          selectedAdditionalServices,
         })).toEqual(result);
       });
     });
@@ -161,7 +149,6 @@ describe('calculateCostAndDiscounts', () => {
         earlyDiscountDayCount: 30,
       };
       const promoCodeDiscount = 10;
-      const selectedAdditionalServices = [{}, {}, {}, {}, {}];
       const result = [15800, 0, 15800, 10, 14220, 0, 14220, 0, 14220];
 
       it('should be equal [15800, 0, 15800, 10, 14220, 0, 14220, 0, 14220]', () => {
@@ -171,8 +158,6 @@ describe('calculateCostAndDiscounts', () => {
           scootersCount,
           bookingType,
           dateTour,
-          additionalServices,
-          selectedAdditionalServices,
         })).toEqual(result);
       });
     });
@@ -225,7 +210,6 @@ describe('calculateCostAndDiscounts', () => {
       earlyDiscountDayCount: 30,
     };
     const promoCodeDiscount = 10;
-    const selectedAdditionalServices = [{}, {}, {}, {}, {}];
     const result = [15800, 15, 13430, 0, 13430, 0, 13430, 0, 13430];
 
     it('should be equal [15800, 15, 13430, 0, 13430, 0, 13430, 0, 13430]', () => {
@@ -235,8 +219,6 @@ describe('calculateCostAndDiscounts', () => {
         scootersCount,
         bookingType,
         dateTour,
-        additionalServices,
-        selectedAdditionalServices,
       })).toEqual(result);
     });
   });
@@ -271,7 +253,6 @@ describe('calculateCostAndDiscounts', () => {
         scooterPrice: 15900,
         earlyDiscountDayCount: 30,
       };
-      const selectedAdditionalServices = [{}, {}, {}, {}, {}];
 
 
       const resultDecrease = [15800, 0, 15800, 0, 15800, 10, 14220, 0, 14220];
@@ -284,7 +265,6 @@ describe('calculateCostAndDiscounts', () => {
           bookingType,
           dateTour,
           additionalServices,
-          selectedAdditionalServices,
         })).toEqual(resultDecrease);
       });
 
@@ -298,7 +278,6 @@ describe('calculateCostAndDiscounts', () => {
           bookingType,
           dateTour,
           additionalServices,
-          selectedAdditionalServices,
         })).toEqual(resultIncrease);
       });
     });
@@ -343,7 +322,6 @@ describe('calculateCostAndDiscounts', () => {
         orderBlockCountDays: 3,
         earlyDiscountDayCount: 30,
       };
-      const selectedAdditionalServices = [{}, {}, {}, {}, {}];
       const resultWithoutChange = [15900, 10, 14310, 0, 14310, 10, 12879, 0, 12879];
 
       it('should be equal [15900, 10, 14310, 0, 14310, 10, 12879, 0, 12879]', () => {
@@ -354,7 +332,6 @@ describe('calculateCostAndDiscounts', () => {
           bookingType,
           dateTour: null,
           additionalServices,
-          selectedAdditionalServices,
         })).toEqual(resultWithoutChange);
       });
 
@@ -369,7 +346,6 @@ describe('calculateCostAndDiscounts', () => {
           bookingType,
           dateTour: dateTourWithPromotion,
           additionalServices,
-          selectedAdditionalServices,
         })).toEqual(resultWithPromotionDiscount);
       });
 
@@ -384,7 +360,6 @@ describe('calculateCostAndDiscounts', () => {
           bookingType,
           dateTour: dateTourWithoutPromotion,
           additionalServices,
-          selectedAdditionalServices,
         })).toEqual(resultWithoutPromotionDiscount);
       });
     });
@@ -524,7 +499,6 @@ describe('calculateCostAndDiscounts', () => {
         scooterPrice: 16000,
         earlyDiscountDayCount: 30,
       };
-      const selectedAdditionalServices = [{}, {}, {}, {}, {}];
       const result = [32000, 0, 32000, 0, 32000, 0, 32000, 0, 32000];
 
       it('should be equal [32000, 0, 32000, 0, 32000, 0, 32000, 0, 32000]', () => {
@@ -535,7 +509,6 @@ describe('calculateCostAndDiscounts', () => {
           bookingType,
           dateTour,
           additionalServices,
-          selectedAdditionalServices,
         })).toEqual(result);
       });
     });
@@ -569,7 +542,6 @@ describe('calculateCostAndDiscounts', () => {
         scooterPrice: 16000,
         earlyDiscountDayCount: 30,
       };
-      const selectedAdditionalServices = [{}, {}, {}, {}, {}];
       const result = [16000, 0, 16000, 5, 15200, 0, 15200, 0, 15200];
 
       it('should be equal [16000, 0, 16000, 5, 15200, 0, 15200, 0, 15200]', () => {
@@ -580,7 +552,6 @@ describe('calculateCostAndDiscounts', () => {
           bookingType,
           dateTour,
           additionalServices,
-          selectedAdditionalServices,
         })).toEqual(result);
       });
     });
