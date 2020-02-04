@@ -28,9 +28,17 @@ var getAppliedAdditionalServices = function getAppliedAdditionalServices(params)
   var order = params.order,
       additionalServices = params.additionalServices,
       selectedAdditionalServices = params.selectedAdditionalServices;
+  var isBothArray = (0, _ramda.is)(Array, additionalServices) && (0, _ramda.is)(Array, selectedAdditionalServices);
+  var orderAdditionalServices = (0, _ramda.prop)('additionalServices', order);
+  var hasAdditionalServices = (0, _ramda.is)(Array, orderAdditionalServices);
+
+  if ((0, _ramda.not)(isBothArray) && (0, _ramda.not)(hasAdditionalServices)) {
+    return [];
+  }
+
   var servicesFromOrder = (0, _ramda.prop)('additionalServices', order);
   var unitedServices = (0, _unionById["default"])(servicesFromOrder, additionalServices);
-  var ids = (0, _pluckIdsAndFilterVoid["default"])(selectedAdditionalServices || order.additionalServices || []);
+  var ids = (0, _pluckIdsAndFilterVoid["default"])(selectedAdditionalServices || orderAdditionalServices);
   var isServiceSelected = (0, _containsIds["default"])(ids);
   return (0, _ramda.filter)(isServiceSelected, unitedServices);
 };
