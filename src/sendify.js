@@ -4,7 +4,7 @@ import {
 import sendifyCollection from './internal/sendifyCollection';
 import sendifyObject from './internal/sendifyObject';
 
-/** Function used to transform a sendify data */
+/** Function used to transform a send data */
 const sendify = cond([
   [is(Array), sendifyCollection],
   [is(Object), sendifyObject],

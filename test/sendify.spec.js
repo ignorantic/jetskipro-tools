@@ -135,4 +135,53 @@ describe('sendify', () => {
       expect(sendify(data)).toEqual(result);
     });
   });
+
+  describe('filter empty arrays', () => {
+    const data = {
+      newPosts: [
+        {
+          authors: [
+            {
+              id: 1,
+              userId: 1,
+              posts: [],
+            },
+            {
+              id: 2,
+              userId: 666,
+              posts: [1, 2, 5],
+            },
+          ],
+        },
+        {
+          tags: [],
+        },
+      ],
+    };
+    const result = {
+      new_posts: [
+        {
+          authors: [
+            {
+              id: 1,
+              user_id: 1,
+              posts: undefined,
+            },
+            {
+              id: 2,
+              user_id: 666,
+              posts: [1, 2, 5],
+            },
+          ],
+        },
+        {
+          tags: undefined,
+        },
+      ],
+    };
+
+    it('should return a transformed array without empty value', () => {
+      expect(sendify(data)).toEqual(result);
+    });
+  });
 });
