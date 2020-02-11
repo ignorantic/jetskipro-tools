@@ -21,7 +21,7 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-/** Function used to transform a object to be sendify */
+/** Function used to transform a object to be send */
 var sendifyObject = (0, _ramda.compose)(_ramda.fromPairs, (0, _ramda.map)(function (_ref) {
   var _ref2 = _slicedToArray(_ref, 2),
       key = _ref2[0],
