@@ -282,6 +282,50 @@ describe('calculateCostAndDiscounts', () => {
       });
     });
 
+    describe('return cost without prepayment discount while booking type change', () => {
+      const order = {
+        totalPrice: 28440,
+        status: 'waiting',
+        permission: 'write_any_fields',
+        dateTour: '2019-09-03T12:00:00+03:00',
+        guestsCount: 3,
+        scootersCount: 2,
+        scooterPrice: 15800,
+        additionalServicesCount: 5,
+        additionalServices: [],
+        communicationMethodsCount: 3,
+        communicationMethods: [],
+        discounts: [
+          {
+            type: 'prepayment',
+            firstPrice: 31600,
+            value: 10,
+          },
+        ],
+      };
+
+      const bookingType = 'none';
+      const { dateTour } = order;
+      const calculations = {
+        discountPrepayment: 10,
+        scooterPrice: 15900,
+        earlyDiscountDayCount: 30,
+      };
+
+      const resultDecrease = [15800, 0, 15800, 0, 15800, 0, 15800, 0, 15800];
+
+      it('should be equal [15800, 0, 15800, 0, 15800, 0, 15800, 0, 15800]', () => {
+        expect(calculateCostAndDiscounts({
+          order,
+          calculations,
+          scootersCount: 1,
+          bookingType,
+          dateTour,
+          additionalServices,
+        })).toEqual(resultDecrease);
+      });
+    });
+
     describe('return cost with new promotion discount while date change', () => {
       const order = {
         totalPrice: 12879,

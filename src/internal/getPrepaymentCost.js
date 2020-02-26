@@ -18,7 +18,6 @@ const getPrepaymentCost = (params) => {
     bookingType,
     calculations,
     dateTour,
-    order,
   } = params;
 
   const { discountPrepayment } = calculations;
