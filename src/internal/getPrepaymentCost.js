@@ -1,7 +1,5 @@
-import isSameDay from './isSameDay';
 import applyDiscount from './applyDiscount';
 import { isDateEarlyEnough } from '../isDateEarlyEnough';
-import extractPrepaymentDiscount from './extractPrepaymentDiscount';
 
 /**
  * Get value of prepayment discount and discount cost
@@ -22,13 +20,6 @@ const getPrepaymentCost = (params) => {
     dateTour,
     order,
   } = params;
-
-  if (isSameDay(dateTour, order)) {
-    const appliedPrepaymentDiscount = extractPrepaymentDiscount(order);
-    const prepaymentCost = applyDiscount(promoCodeCost, appliedPrepaymentDiscount);
-
-    return [appliedPrepaymentDiscount, prepaymentCost];
-  }
 
   const { discountPrepayment } = calculations;
   const isDateEarly = isDateEarlyEnough(dateTour, calculations);

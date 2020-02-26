@@ -322,18 +322,6 @@ describe('calculateCostAndDiscounts', () => {
         orderBlockCountDays: 3,
         earlyDiscountDayCount: 30,
       };
-      const resultWithoutChange = [15900, 10, 14310, 0, 14310, 10, 12879, 0, 12879];
-
-      it('should be equal [15900, 10, 14310, 0, 14310, 10, 12879, 0, 12879]', () => {
-        expect(calculateCostAndDiscounts({
-          order,
-          calculations,
-          scootersCount: null,
-          bookingType,
-          dateTour: null,
-          additionalServices,
-        })).toEqual(resultWithoutChange);
-      });
 
       const dateTourWithPromotion = moment().add(33, 'day');
       const resultWithPromotionDiscount = [15900, 20, 12720, 0, 12720, 10, 11448, 0, 11448];
