@@ -5,13 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _isSameDay = _interopRequireDefault(require("./isSameDay"));
-
 var _applyDiscount = _interopRequireDefault(require("./applyDiscount"));
 
 var _isDateEarlyEnough = require("../isDateEarlyEnough");
-
-var _extractPrepaymentDiscount = _interopRequireDefault(require("./extractPrepaymentDiscount"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -32,15 +28,6 @@ var getPrepaymentCost = function getPrepaymentCost(params) {
       calculations = params.calculations,
       dateTour = params.dateTour,
       order = params.order;
-
-  if ((0, _isSameDay["default"])(dateTour, order)) {
-    var _appliedPrepaymentDiscount = (0, _extractPrepaymentDiscount["default"])(order);
-
-    var _prepaymentCost = (0, _applyDiscount["default"])(promoCodeCost, _appliedPrepaymentDiscount);
-
-    return [_appliedPrepaymentDiscount, _prepaymentCost];
-  }
-
   var discountPrepayment = calculations.discountPrepayment;
   var isDateEarly = (0, _isDateEarlyEnough.isDateEarlyEnough)(dateTour, calculations);
   var appliedPrepaymentDiscount = discountPrepayment && isDateEarly && bookingType === 'full' ? discountPrepayment : 0;
